@@ -18,8 +18,11 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: 1.95
-          targets: wasm32-unknown-unknow
+          targets: wasm32-unknown-unknown
           components: rustfmt, clippy
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
 
       - name: Output Rust Version for debugging
         run: rustc --version
@@ -38,8 +41,6 @@ jobs:
       - name: Run Clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
 
-        - name: Cache Rust build
-          uses: Swatinem/rust-cache@v2
 
 
 
