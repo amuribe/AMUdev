@@ -1,6 +1,11 @@
+# AMUdev
+
+[![CI](https://github.com/OWNER/REPOSITORY/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/amuribe/AMUdev/actions/workflows/ci.yml)
+![Rust](https://img.shields.io/badge/rust-1.95-informational)
+
 <picture>
-    <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
-    <img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo">
+<source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_Solid_White.svg" media="(prefers-color-scheme: dark)">
+<img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo">
 </picture>
 
 # Leptos Axum Starter Template
@@ -16,6 +21,7 @@ cargo install cargo-leptos --locked
 ```
 
 Then run
+
 ```bash
 cargo leptos new --git https://github.com/leptos-rs/start-axum
 ```
@@ -38,22 +44,43 @@ cargo leptos watch
 
 ## Installing Additional Tools
 
-By default, `cargo-leptos` uses `nightly` Rust, `cargo-generate`, and `sass`. If you run into any trouble, you may need to install one or more of these tools.
+This project builds with stable Rust. Install the WebAssembly target and the same `cargo-leptos` version used by the Dockerfile:
 
-1. `rustup toolchain install nightly --allow-downgrade` - make sure you have Rust nightly
-2. `rustup target add wasm32-unknown-unknown` - add the ability to compile Rust to WebAssembly
-3. `cargo install cargo-generate` - install `cargo-generate` binary (should be installed automatically in future)
-4. `npm install -g sass` - install `dart-sass` (should be optional in future
-5. Run `npm install` in end2end subdirectory before test
+```bash
+rustup target add wasm32-unknown-unknown
+cargo install cargo-leptos --version 0.3.7 --locked
+```
+
+`cargo-leptos` downloads its Sass and WebAssembly optimization helpers when needed. End-to-end tests additionally require `npm ci` in the `end2end` directory and the Playwright browser dependencies.
 
 ## Compiling for Release
+
 ```bash
 cargo leptos build --release
 ```
 
-Will generate your server binary in target/release and your site package in target/site
+This generates the server binary at `target/release/amudev` and the browser assets in `target/site`.
+
+## Running with Docker
+
+Build the production image from the repository root:
+
+```bash
+docker build --tag amudev:local .
+```
+
+Run it and publish the application on port 3000:
+
+```bash
+docker run --rm --publish 3000:3000 amudev:local
+```
+
+Then open <http://localhost:3000>. The image uses a build stage for Rust, `cargo-leptos`, and WebAssembly, then copies only the server binary and generated site into the runtime stage. It runs as an unprivileged user.
+
+The Dockerfile pins Rust 1.95 and `cargo-leptos` 0.3.7 so container builds do not silently change when new toolchain versions are released. Local development and hot reload still use `cargo leptos watch` directly; a containerized development workflow can be added separately if it becomes useful.
 
 ## Testing Your Project
+
 ```bash
 cargo leptos end-to-end
 ```
@@ -66,17 +93,21 @@ Cargo-leptos uses Playwright as the end-to-end test tool.
 Tests are located in end2end/tests directory.
 
 ## Executing a Server on a Remote Machine Without the Toolchain
+
 After running a `cargo leptos build --release` the minimum files needed are:
 
-1. The server binary located in `target/server/release`
+1. The server binary located at `target/release/amudev`
 2. The `site` directory and all files within located in `target/site`
 
 Copy these files to your remote server. The directory structure should be:
+
 ```text
 amudev
 site/
 ```
+
 Set the following environment variables (updating for your project as needed):
+
 ```sh
 export LEPTOS_OUTPUT_NAME="amudev"
 export LEPTOS_SITE_ROOT="site"
@@ -84,6 +115,7 @@ export LEPTOS_SITE_PKG_DIR="pkg"
 export LEPTOS_SITE_ADDR="127.0.0.1:3000"
 export LEPTOS_RELOAD_PORT="3001"
 ```
+
 Finally, run the server binary.
 
 ## Licensing
