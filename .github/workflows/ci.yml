@@ -24,6 +24,19 @@ jobs:
         run: rustc --version
       - name: Install cargo-leptos
         run: cargo install cargo-leptos --version 0.3.7 --locked
+      - name: Check WASM target
+        run: rustup target list --installed
+      - name: Check cargo-leptos
+        run: cargo leptos --version
+      - name: Build Leptos app
+        run: cargo leptos build --release
+
+      - name: Check formatting
+        run: cargo fmt --check
+
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
 
 
 
