@@ -1,6 +1,6 @@
 # AMUdev
 
-[![CI](https://github.com/OWNER/REPOSITORY/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/amuribe/AMUdev/actions/workflows/ci.yml)
+[![CI](https://github.com/amuribe/AMUdev/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/amuribe/AMUdev/actions/workflows/ci.yml)
 ![Rust](https://img.shields.io/badge/rust-1.95-informational)
 
 <picture>
