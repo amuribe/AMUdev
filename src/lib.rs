@@ -1,4 +1,7 @@
+#![recursion_limit = "256"]
 pub mod app;
+pub mod components;
+pub mod models;
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]
