@@ -1,0 +1,31 @@
+.hero {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    padding-top: var(--space-4);
+}
+
+.hero-content {
+    max-width: 640px;
+}
+
+.hero-heading h1{
+    padding: 0;
+}
+
+.hero-eyebrow {
+    margin-bottom: var(--space-4);
+    color: var(--color-text-muted);
+}
+
+.hero-description {
+    max-width: 475px;
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
