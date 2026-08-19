@@ -1,0 +1,124 @@
+/* --------------------------------------------------
+   RESET / NORMALIZATION
+   -------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  background: var(--color-background);
+  color: var(--color-text-primary);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------
+   TYPOGRAPHY
+   -------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: var(--line-height-tight);
+  font-family: var(--font-heading);
+}
+
+p {
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------
+   LINKS
+   -------------------------------------------------- */
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+/* --------------------------------------------------
+   MEDIA
+   -------------------------------------------------- */
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------
+   FORM ELEMENTS
+   -------------------------------------------------- */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* --------------------------------------------------
+   LISTS
+   -------------------------------------------------- */
+
+ul,
+ol {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------
+   ACCESSIBILITY
+   -------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------
+   PAGE
+   -------------------------------------------------- */
+
+.page-container {
+  // 48px -> 2, 24px gutters
+  width: min(1200px, calc(100% - 48px));
+  // Center container
+  margin-inline: auto;
+}
