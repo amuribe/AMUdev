@@ -1,0 +1,9 @@
+.git
+.gitignore
+target
+end2end
+.env
+.env.*
+!.env.example
+README.md
+LICENSE
